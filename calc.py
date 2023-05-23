@@ -14,6 +14,8 @@ obj = Entry(frm, relief=RIDGE, textvariable=display, justify='right',
          font='arial 40 bold', bd=10, bg='powder blue', width=20, xscrollcommand=scrollbar.set)
 obj.place(x=25, y=10, width=400, height=80)
 scrollbar.config(command=obj.xview)
+obj.focus()
+
 z=110
 for exp in ('789*', '456/', '123+', 'c0.-'):
     r=10
@@ -49,6 +51,7 @@ im=PhotoImage(file='plusminus.gif')
 minustbutton.config(image=im)
 def getbutt(c,d,y):
     global x
+    
     op_list = ('*', '/', '+', '-')
     op_list1 = ('*', '/', '+', '-', '0')
     # شرط عدم بدء عملية حسابية جديدة باستخدام أزرار العمليات الحسابية أو الصفر ولكن يجب البدء برقم
@@ -64,7 +67,9 @@ def getbutt(c,d,y):
     # لحذف آخر رقم أو رمز تم إدخاله
     if c=='c':
         d.set(d.get()[:-2])
+    obj.icursor("end")
     return x
+
 def evaluated(stored):
     global x
     try:
