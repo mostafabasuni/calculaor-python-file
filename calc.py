@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter as tk
 frm = Tk()
 frm.geometry('450x670+400+150')
 frm.config(bg ='cadet blue')
@@ -6,9 +7,13 @@ frm.title('Mostafa Caculator')
 display = StringVar()
 global x
 x=0
+scrollbar = Scrollbar(frm, orient='horizontal')
+scrollbar.place(x=25, y=95, width=400, height=10)
+
 obj = Entry(frm, relief=RIDGE, textvariable=display, justify='right',
-         font='arial 40 bold', bd=10, bg='powder blue', width=20)
+         font='arial 40 bold', bd=10, bg='powder blue', width=20, xscrollcommand=scrollbar.set)
 obj.place(x=25, y=10, width=400, height=80)
+scrollbar.config(command=obj.xview)
 z=110
 for exp in ('789*', '456/', '123+', 'c0.-'):
     r=10
@@ -20,6 +25,8 @@ for exp in ('789*', '456/', '123+', 'c0.-'):
         bd=10, command=lambda ch=char: getbutt(ch,display,x))
         butt.place(x=r, y=5, width=80, height=80)
         r = r + 90
+        
+
 
 frame2 = Frame(frm, bd=10, bg='silver')
 frame2.place(x=30, y=550, width=390, height=100)
@@ -32,6 +39,7 @@ equal.place(x=140, y=560, width=80, height=80)
 percentbutton = Button(frm, text='%', bg='white', font='arial 30 bold',
          bd=5, command=lambda: display.set(eval(display.get())/100)
                  if display.get() != '' else evaluated(display))
+
 percentbutton.place(x=230, y=560, width=80, height=80)
 minustbutton = Button(frm, bg='white', font='arial 30 bold', bd=5,
              command=lambda: display.set('') if display.get() ==''
