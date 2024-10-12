@@ -11,7 +11,7 @@ scrollbar = Scrollbar(frm, orient='horizontal')
 scrollbar.place(x=30, y=95, width=390, height=15)
 
 obj = Entry(frm, relief=RIDGE, textvariable=display, justify='right',
-         font='arial 40 bold', bd=10, bg='powder blue', width=20, xscrollcommand=scrollbar.set)
+        font='arial 40 bold', bd=10, bg='powder blue', width=20, xscrollcommand=scrollbar.set)
 obj.place(x=25, y=10, width=400, height=80)
 scrollbar.config(command=obj.xview)
 obj.focus()
@@ -27,28 +27,29 @@ for exp in ('789*', '456/', '123+', 'c0.-'):
         bd=10, command=lambda ch=char: getbutt(ch,display,x))
         butt.place(x=r, y=5, width=80, height=80)
         r = r + 90
-        
-
 
 frame2 = Frame(frm, bd=10, bg='silver')
 frame2.place(x=30, y=560, width=390, height=100)
 Clearbutton = Button(frm, text='C', bg='white', font='arial 30 bold',
             bd=5, command=lambda: display.set(""))
+
 Clearbutton.place(x=50, y=570, width=80, height=80 )
 equal = Button(frm, text='=', bg='white', font='arial 30 bold', bd=5,
-               command=lambda: evaluated(display))
+            command=lambda: evaluated(display))
 equal.place(x=140, y=570, width=80, height=80)
-percentbutton = Button(frm, text='%', bg='white', font='arial 30 bold',
-         bd=5, command=lambda: display.set(eval(display.get())/100)
-                 if display.get() != '' else evaluated(display))
 
+percentbutton = Button(frm, text='%', bg='white', font='arial 30 bold',
+        bd=5, command=lambda: display.set(eval(display.get())/100)
+                if display.get() != '' else evaluated(display))
 percentbutton.place(x=230, y=570, width=80, height=80)
-minustbutton = Button(frm, bg='white', font='arial 30 bold', bd=5,
-             command=lambda: display.set('') if display.get() ==''
+
+minustbutton = Button(frm, text='-/+', bg='white', font='arial 30 bold', bd=5,
+            command=lambda: display.set('') if display.get() ==''
              else display.set(float(display.get()) * (-1)))
 minustbutton.place(x=320, y=570, width=80, height=80)
-im=PhotoImage(file='plusminus.gif')
-minustbutton.config(image=im)
+#im=PhotoImage(file='plusminus.gif')
+#minustbutton.config(image=im)
+
 def getbutt(c,d,y):
     global x
     
